@@ -52,8 +52,6 @@ public class Robot extends TimedRobot {
 
     NAME.set(Value.kOff);
 
-    if (FilteredController.getYButton()) {
-      NAME.toggle();
+ 
    }
   }
-}
