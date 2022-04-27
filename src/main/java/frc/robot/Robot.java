@@ -4,7 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -19,6 +21,9 @@ public class Robot extends TimedRobot {
   private final PWMSparkMax m_rightMotorFront = new PWMSparkMax(2);
   private final PWMSparkMax m_leftMotorBack = new PWMSparkMax(3);
   private final PWMSparkMax m_rightMotorBack = new PWMSparkMax(4);
+
+  private final DoubleSolenoid NAME = new DoubleSolenoid(PneumaticsModuleType.REVPH, 1, 2);
+  private final DoubleSolenoid NAMEII = new DoubleSolenoid(PneumaticsModuleType.REVPH, 3, 4);
 
   private final MotorControllerGroup m_left = new MotorControllerGroup(m_leftMotorFront, m_leftMotorBack);
   private final MotorControllerGroup m_right = new MotorControllerGroup(m_rightMotorFront, m_rightMotorBack);
