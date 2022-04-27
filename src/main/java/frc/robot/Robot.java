@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import frc.robot.FilteredController;
+import frc.robot.InputFilter;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -49,5 +51,9 @@ public class Robot extends TimedRobot {
     m_robotDrive.arcadeDrive(-m_stick.getY(), m_stick.getX());
 
     NAME.set(Value.kOff);
+
+    if (FilteredController.getYButton()) {
+      NAME.toggle();
+   }
   }
 }
