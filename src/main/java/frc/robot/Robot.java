@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -24,6 +25,9 @@ public class Robot extends TimedRobot {
   private final PWMSparkMax m_rightMotorFront = new PWMSparkMax(2);
   private final PWMSparkMax m_leftMotorBack = new PWMSparkMax(3);
   private final PWMSparkMax m_rightMotorBack = new PWMSparkMax(4);
+
+  private static final XboxController m_controller = new XboxController(0);
+  public static final FilteredController filteredController = new FilteredController(m_controller);
 
   private final DoubleSolenoid NAME = new DoubleSolenoid(PneumaticsModuleType.REVPH, 1, 2);
   private final DoubleSolenoid NAMEII = new DoubleSolenoid(PneumaticsModuleType.REVPH, 3, 4);
@@ -41,6 +45,7 @@ public class Robot extends TimedRobot {
     // gearbox is constructed, you might have to invert the left side instead.
     //TODO
    m_right.setInverted(true);
+    NAME.set(Value.kOff);
   }
 
   @Override
@@ -50,7 +55,15 @@ public class Robot extends TimedRobot {
     // and backward, and the X turns left and right.
     m_robotDrive.arcadeDrive(-m_stick.getY(), m_stick.getX());
 
-    NAME.set(Value.kOff);
+    var AButton = m_controller.getAButton();
+
+
+    if(AButton){
+      NAME.set(Value.kForward);
+    } else{
+      NAME.set(Value.kReverse);
+    }
+   
 
  
    }
